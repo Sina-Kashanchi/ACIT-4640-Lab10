@@ -34,8 +34,10 @@ build {
   ]
 
   provisioner "ansible" {
-    ansible_env_vars = ["ANSIBLE_HOST_KEY_CHECKING=False"]
+    ansible_env_vars = ["ANSIBLE_HOST_KEY_CHECKING=False", "ANSIBLE_REMOTE_TEMP=/tmp/.ansible"]
     playbook_file    = "./ansible/playbook.yml"
-    user             = var.ssh_username
+    user             = "ubuntu"
+    use_proxy = false
+    extra_arguments = ["--become", "-vvv"]
   }
 }
